@@ -112,9 +112,9 @@ def get_chip_owners() -> Dict[str, int]:
     # /dev/accel_ or /dev/vfio/_
     if re.fullmatch(r"/dev/(?:accel|vfio/)\d", file):
       match = re.fullmatch(r"/proc/(\d+)/fd/\d+", link)
-      if not match:
-        raise RuntimeError("Unknown link pattern", link)
-
-      device_owners[file] = int(match.group(1))
+      # if not match:
+      #   raise RuntimeError("Unknown link pattern", link)
+      if match:
+        device_owners[file] = int(match.group(1))
 
   return device_owners
